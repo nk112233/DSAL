@@ -15,17 +15,11 @@ class MyQue{
         f = -1;
         r = -1;
         size = 10; 
-
-
-
     }
     public:MyQue(int finp , int rinp ){
         f = finp;
         r = rinp; 
         size = 10;
-
-
-
     }
     public :
         bool Isempty();
@@ -35,20 +29,14 @@ class MyQue{
         void display();
         void disprec(int index);
         int getsize();
-
-
 };
 int MyQue :: getsize(){
 	return size;
-	
-
 }
 bool MyQue :: Isempty(){
     if(r == -1){
         // cout <<"Empty"<<endl;
         return 1;
-
-
     }
     else {
         return 0;
@@ -58,14 +46,10 @@ bool MyQue :: Isfull(){
     if(  ((r == size-1 && f == 0) || (r == f-1))){
         // cout <<"Full"<<endl;
         return 1;
-
-
     }
     else {
         return 0;
     }
-
-
 }
 void MyQue :: Equeue(){
     if(!Isfull()){
@@ -87,9 +71,6 @@ void MyQue :: Equeue(){
             cin>>e[r].emplid;
             cout <<"Enter Employee Salary : "<<endl;
             cin>>e[r].emplsalary;
-            
-           
-        
         if(f==-1){
             f++;
         
@@ -125,15 +106,11 @@ void MyQue :: Dqueue(){
         }
     }
 
-
 }
 void MyQue :: disprec(int index){
     cout <<"Employee name : "<<"\t"<<"Employee ID : "<<"\t"<<"Employee Salary : "<<"\t"<<endl;
     cout <<e[index].emplname<<"\t\t\t\t"<<e[index].emplid<<"\t\t\t"<<e[index].emplsalary<<"\t";
     cout <<"\n";
-
-    
-
 }
 void MyQue :: display(){
     cout <<"Working "<<endl;
@@ -152,13 +129,8 @@ else if(r<f && r>0) {
 }
 else{
 	cout <<"Enter data to display ! "<<endl;
-
-
-
 }
 }
-
-
 int main(){
     MyQue Q;
     int ne,nd;
@@ -204,12 +176,9 @@ int main(){
         cout<<"You have enetered wrong choice !"<<endl;
         break;
     }
-
-
     cout <<"Do you want to continue(y or n) ? "<<endl;
     cin>>ch;
     }while (ch == 'y' || ch == 'Y');
   
-
 return 0;
 }

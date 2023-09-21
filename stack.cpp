@@ -7,7 +7,10 @@ struct Node {
     
 };
 class Stack{
-    private : Node *tos = NULL;
+    private : Node *tos;
+    public: Stack(){
+    	tos = NULL;
+    }
 public:
     bool push(char elem){
        
@@ -55,8 +58,13 @@ public:
 
 
 };
-int main(){
-
+/*int main(){
+	Stack s;
+	s.push('a');
+	s.push('b');
+	s.push('c');
+	cout << s.pop()<<endl;
+	cout << s.peep()<<endl;
 
 
 
@@ -70,3 +78,4 @@ int main(){
 
 return 0;
 }
+*/

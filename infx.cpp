@@ -1,9 +1,11 @@
 #include <iostream>
-#include </home/pict/SE_23312/DSAL/stack.cpp>
+#include "stack.h"
+#include <cctype>
+#include <typeinfo>
 using namespace std;
 
-int isp(Stack s){
-	x = s.peep();
+int isp(Stack<int> s){
+	char x = s.peep();
 	if(x == '^'){
 		return 3;
 	}
@@ -15,8 +17,9 @@ int isp(Stack s){
 		return 1;
 	
 	}
-
-
+	else{
+		return 0;
+	}
 
 }
 int icp(char a){
@@ -33,30 +36,98 @@ int icp(char a){
 	}
 
 }
-char [] infxtpstfx(){
+
+
+string  infxtpstfx(char infx[20],int n){
+	string postfix;
+	Stack<int> s;
+	for(int i = 0;i<n;i++){
+		char ch = infx[i];
+		if(!isdigit(ch)){
+			if(icp(ch)<=isp(s)){
+				while(icp(ch)<isp(s)){
+					if(!s.IsEmpty())
+						postfix += s.pop();
+					else{
+						break;
+					}
+			}
+				s.push(ch);
+			}
+			if(icp(ch)>isp(s))
+				s.push(ch);
+			
+		}
+		else{
+				postfix += ch;
+			}
 	
+	}
+	while(!s.IsEmpty())
+		postfix += s.pop();
+	return postfix;
+}
 
 
-
+int calculate(int op1 , char oprt,int op2){
+	int result;
+	
+	// cout <<"op1 = "<< op1<<endl;
+	// cout <<"op2 = "<< op2<<endl;
+	// cout << oprt<<endl;
+	if(oprt == '+'){
+		result = op2+op1;
+	}
+	else if(oprt == '-'){
+		result = op2-op1;
+	}
+	else if(oprt == '*'){
+		result = op2*op1;
+		// cout << "result = "<<result<<endl;
+	}
+	else if(oprt == '/'){
+		result = op2/op1;
+	}
+	return result;
 
 
 }
-char postfix[20];
+
+
+int evaluate(string postfix){
+	Stack<int> s;
+	int i = 0;
+	while(postfix[i]!='\0'){
+		if(isdigit(postfix[i])){
+			int push = postfix[i] - '0';
+			s.push(push);
+		}
+		else{
+			if(!s.IsEmpty()){
+				int op1 = s.pop();
+				int op2 = s.pop();
+				char oprt = postfix[i];
+				// cout << op1<<endl;
+				// cout <<op2<<endl;
+				// cout << oprt <<endl;
+				s.push(calculate(op1,oprt,op2));
+				}
+		}
+		i++;
+	}
+	
+	return s.peep(); 
+}
+
 int main(){
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	char infix[20];
+	int n;
+	cout << "Enter the length of the expression : "<<endl;
+	cin >> n;
+	cout << "Enter Infix Expression : "<<endl;
+	cin >> infix;
+	cout <<"Postfix Expression is : "<< infxtpstfx(infix,n) <<endl;
+	cout <<"Evaluation of "<<infix<<" is : "<<evaluate(infxtpstfx(infix,n))<<endl;
 
 return 0;
 }

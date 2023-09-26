@@ -4,7 +4,7 @@
 #include <typeinfo>
 using namespace std;
 
-int isp(Stack<int> s){
+int isp(Stack<char> s){
 	char x = s.peep();
 	if(x == '^'){
 		return 3;
@@ -17,12 +17,19 @@ int isp(Stack<int> s){
 		return 1;
 	
 	}
-	else{
+	else if(x == '('){
 		return 0;
+	}
+	else{
+		return -1;
 	}
 
 }
 int icp(char a){
+	if(a == '('){
+		return 4;
+	
+	}
 	if(a == '^'){
 		return 3;
 	}
@@ -34,17 +41,30 @@ int icp(char a){
 		return 1;
 	
 	}
+	else{
+		return 0;
+	}
 
 }
 
 
-string  infxtpstfx(char infx[20],int n){
+string  infxtpstfx(char infx[200],int n){
 	string postfix;
-	Stack<int> s;
+	Stack<char> s;
 	for(int i = 0;i<n;i++){
 		char ch = infx[i];
-		if(!isdigit(ch)){
-			if(icp(ch)<=isp(s)){
+		//cout <<"infx[i] = "<<infx[i]<<endl;
+		if(!isalpha(ch)){
+			if(ch ==')'){
+				while(s.peep() != '('){
+					postfix += s.pop();
+					//cout << "tos = "<<s.peep()<<endl;
+				
+				}
+				s.pop();
+
+			}
+			else if(icp(ch)<=isp(s)){
 				while(icp(ch)<isp(s)){
 					if(!s.IsEmpty())
 						postfix += s.pop();
@@ -54,7 +74,7 @@ string  infxtpstfx(char infx[20],int n){
 			}
 				s.push(ch);
 			}
-			if(icp(ch)>isp(s))
+			else if(icp(ch)>isp(s))
 				s.push(ch);
 			
 		}
@@ -98,8 +118,10 @@ int evaluate(string postfix){
 	Stack<int> s;
 	int i = 0;
 	while(postfix[i]!='\0'){
-		if(isdigit(postfix[i])){
-			int push = postfix[i] - '0';
+		if(isalpha(postfix[i])){
+			int push;
+			cout <<"Enter the value of "<<postfix[i]<<" : "<<endl;
+			cin >>push; 
 			s.push(push);
 		}
 		else{
@@ -120,14 +142,15 @@ int evaluate(string postfix){
 }
 
 int main(){
-	char infix[20];
+	char infix[200];
 	int n;
 	cout << "Enter the length of the expression : "<<endl;
 	cin >> n;
 	cout << "Enter Infix Expression : "<<endl;
 	cin >> infix;
 	cout <<"Postfix Expression is : "<< infxtpstfx(infix,n) <<endl;
-	cout <<"Evaluation of "<<infix<<" is : "<<evaluate(infxtpstfx(infix,n))<<endl;
+	int ans = evaluate(infxtpstfx(infix,n));
+	cout <<"Evaluation of "<<infix<<" is : "<<ans<<endl;
 
 return 0;
 }

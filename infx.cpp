@@ -2,6 +2,8 @@
 #include "stack.h"
 #include <cctype>
 #include <typeinfo>
+#include <cmath>
+#include <string.h>
 using namespace std;
 
 int isp(Stack<char> s){
@@ -25,6 +27,7 @@ int isp(Stack<char> s){
 	}
 
 }
+
 int icp(char a){
 	if(a == '('){
 		return 4;
@@ -48,13 +51,13 @@ int icp(char a){
 }
 
 
-string  infxtpstfx(char infx[200],int n){
+string  infxtpstfx(string infx,int n){
 	string postfix;
 	Stack<char> s;
 	for(int i = 0;i<n;i++){
 		char ch = infx[i];
 		//cout <<"infx[i] = "<<infx[i]<<endl;
-		if(!isalpha(ch)){
+		if(!isalpha(ch)){			
 			if(ch ==')'){
 				while(s.peep() != '('){
 					postfix += s.pop();
@@ -108,6 +111,10 @@ int calculate(int op1 , char oprt,int op2){
 	else if(oprt == '/'){
 		result = op2/op1;
 	}
+	else if(oprt == '^'){
+		result = pow(op2,op1);
+	
+	}
 	return result;
 
 
@@ -120,6 +127,7 @@ int evaluate(string postfix){
 	while(postfix[i]!='\0'){
 		if(isalpha(postfix[i])){
 			int push;
+			
 			cout <<"Enter the value of "<<postfix[i]<<" : "<<endl;
 			cin >>push; 
 			s.push(push);
@@ -132,6 +140,9 @@ int evaluate(string postfix){
 				// cout << op1<<endl;
 				// cout <<op2<<endl;
 				// cout << oprt <<endl;
+				if(postfix[i+1] == '^' && oprt == '^'){
+					oprt = '*';
+				}
 				s.push(calculate(op1,oprt,op2));
 				}
 		}
@@ -142,12 +153,13 @@ int evaluate(string postfix){
 }
 
 int main(){
-	char infix[200];
+	string infix;
 	int n;
-	cout << "Enter the length of the expression : "<<endl;
-	cin >> n;
+	//cout << "Enter the length of the expression : "<<endl;
+	//cin >> n;
 	cout << "Enter Infix Expression : "<<endl;
 	cin >> infix;
+	n = infix.length();
 	cout <<"Postfix Expression is : "<< infxtpstfx(infix,n) <<endl;
 	int ans = evaluate(infxtpstfx(infix,n));
 	cout <<"Evaluation of "<<infix<<" is : "<<ans<<endl;

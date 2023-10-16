@@ -16,11 +16,7 @@ class MyQue{
         r = -1;
         size = 10; 
     }
-    public:MyQue(int finp , int rinp ){
-        f = finp;
-        r = rinp; 
-        size = 10;
-    }
+    
     public :
         bool Isempty();
         bool Isfull();
@@ -53,17 +49,6 @@ bool MyQue :: Isfull(){
 }
 void MyQue :: Equeue(){
     if(!Isfull()){
-         if (r == size - 1 && f != 0){
-            r = -1;
-            r = (r+1)%size;
-            cout <<"Enter Employee Name : "<<endl;
-            cin>>e[r].emplname;
-            cout <<"Enter Employee ID : "<<endl;
-            cin>>e[r].emplid;
-            cout <<"Enter Employee Salary : "<<endl;
-            cin>>e[r].emplsalary;
-            }
-        else{
             r = (r+1)%size;
             cout <<"Enter Employee Name : "<<endl;
             cin>>e[r].emplname;
@@ -74,7 +59,6 @@ void MyQue :: Equeue(){
         if(f==-1){
             f++;
         
-    }
      cout <<"r = "<<r;
      cout <<"f = "<< f<<endl;
     }
@@ -85,13 +69,7 @@ void MyQue :: Equeue(){
 }
 void MyQue :: Dqueue(){
     if(!Isempty()){
-    cout <<"Deleteting "<<(f%size)<<" element "<<endl;
-    f = (f+1)%size;
-    cout <<"f = "<< f<<endl;
-    cout <<"r = "<< r<<endl;
-    }
-    else{
-    	if(f==r){
+    if(f==r){
     		cout <<"Deleteting "<<(f%size)<<" element "<<endl;
     		cout <<"f = "<< f<<endl;
     		cout <<"r = "<< r<<endl;
@@ -99,14 +77,20 @@ void MyQue :: Dqueue(){
         	r = -1;
     	
     	}
-    	else{
+    else{  
+    cout <<"Deleteting "<<(f%size)<<" element "<<endl;
+    f = (f+1)%size;
+    cout <<"f = "<< f<<endl;
+    cout <<"r = "<< r<<endl;
+    }  
+    }
+    else{
         cout <<"Queue is empty"<<endl;
         f =-1;
         r = -1;
         }
     }
 
-}
 void MyQue :: disprec(int index){
     cout <<"Employee name : "<<"\t"<<"Employee ID : "<<"\t"<<"Employee Salary : "<<"\t"<<endl;
     cout <<e[index].emplname<<"\t\t\t\t"<<e[index].emplid<<"\t\t\t"<<e[index].emplsalary<<"\t";

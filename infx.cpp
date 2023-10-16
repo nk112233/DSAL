@@ -1,7 +1,5 @@
 #include <iostream>
 #include "stack.h"
-#include <cctype>
-#include <typeinfo>
 #include <cmath>
 #include <string.h>
 using namespace std;

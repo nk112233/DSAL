@@ -92,8 +92,24 @@ string  infxtprfx(string infx,int n){
 
 
 }
-int evaluate(string postfix){
+ 
+int evaluate(string prefix){
+	Stack<char> opr;
+	Stack<int> oprnd;
+	for(char i : prefix){
+		if(!isalpha(i)){
+			opr.push(i);
+
+
+		}
+		else{
+			oprnd.push(i);
+
+		}
 	
+
+	}
+
 
 
 

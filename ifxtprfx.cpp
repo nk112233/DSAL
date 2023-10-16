@@ -92,29 +92,56 @@ string  infxtprfx(string infx,int n){
 
 
 }
- 
-int evaluate(string prefix){
-	Stack<char> opr;
-	Stack<int> oprnd;
-	for(char i : prefix){
-		if(!isalpha(i)){
-			opr.push(i);
+int calculate(int op1 , char oprt,int op2){
+	int result;
+	
+	// cout <<"op1 = "<< op1<<endl;
+	// cout <<"op2 = "<< op2<<endl;
+	// cout << oprt<<endl;
+	if(oprt == '+'){
+		result = op1+op2;
+	}
+	else if(oprt == '-'){
+		result = op1-op2;
+	}
+	else if(oprt == '*'){
+		result = op1*op2;
+		// cout << "result = "<<result<<endl;
+	}
+	else if(oprt == '/'){
+		result = op1/op2;
+	}
+	else if(oprt == '^'){
+		result = pow(op1,op2);
+	
+	}
+	return result;
 
+
+}
+int evaluate(string prefix,int n){
+	Stack<int> oprnd;
+	for(int i = n-1 ; i>0 ;i--){
+		// cout << "p[i]"<<prefix[i]<<endl;
+		if(isalpha(prefix[i])){
+			int op;
+			cout << "Enter the value of "<<prefix[i]<<" :"<<endl;
+			cin >> op;
+			oprnd.push(op);
 
 		}
 		else{
-			oprnd.push(i);
+			if(!oprnd.IsEmpty()){
+			int op1 = oprnd.pop();
+			int op2 = oprnd.pop();
+			char opr = prefix[i];
+			oprnd.push(calculate(op1,opr,op2));
 
 		}
-	
-
+		}
 	}
 
-
-
-
-
-
+	return oprnd.peep();
 
 }
 int main(){
@@ -125,9 +152,11 @@ int main(){
 	cout << "Enter Infix Expression : "<<endl;
 	cin >> infix;
 	n = infix.length();
-	cout <<"Prefix Expression is : "<< infxtprfx(infix,n) <<endl;
-	//int ans = evaluate(infxtpstfx(infix,n));
-	//cout <<"Evaluation of "<<infix<<" is : "<<ans<<endl;
+	string prefix = infxtprfx(infix,n);
+	int n1 = prefix.length();
+	cout <<"Prefix Expression is : "<< infxtprfx(infix,n)  <<endl;
+	int ans = evaluate(infxtprfx(infix,n),n1);
+	cout <<"Evaluation of "<<infix<<" is : "<<ans<<endl;
 
 return 0;
 }

@@ -1,9 +1,8 @@
 #include <iostream>
 #include "stack.h"
-#include <cctype>
-#include <typeinfo>
 #include <cmath>
-#include <bits/stdc++.h>
+#include <algorithm>
+#include<string>
 using namespace std;
 
 int isp(Stack<char> s){
@@ -58,8 +57,6 @@ string  infxtprfx(string infx,int n){
 			if(ch =='('){
 				while(s.peep() != ')'){
 					prefix += s.pop();
-					//cout << "tos = "<<s.peep()<<endl;
-				
 				}
 				s.pop();
 
@@ -94,10 +91,6 @@ string  infxtprfx(string infx,int n){
 }
 int calculate(int op1 , char oprt,int op2){
 	int result;
-	
-	// cout <<"op1 = "<< op1<<endl;
-	// cout <<"op2 = "<< op2<<endl;
-	// cout << oprt<<endl;
 	if(oprt == '+'){
 		result = op1+op2;
 	}
@@ -106,7 +99,6 @@ int calculate(int op1 , char oprt,int op2){
 	}
 	else if(oprt == '*'){
 		result = op1*op2;
-		// cout << "result = "<<result<<endl;
 	}
 	else if(oprt == '/'){
 		result = op1/op2;
@@ -122,7 +114,6 @@ int calculate(int op1 , char oprt,int op2){
 int evaluate(string prefix,int n){
 	Stack<int> oprnd;
 	for(int i = n-1 ; i>0 ;i--){
-		// cout << "p[i]"<<prefix[i]<<endl;
 		if(isalpha(prefix[i])){
 			int op;
 			cout << "Enter the value of "<<prefix[i]<<" :"<<endl;
@@ -147,8 +138,6 @@ int evaluate(string prefix,int n){
 int main(){
 	string infix;
 	int n;
-	//cout << "Enter the length of the expression : "<<endl;
-	//cin >> n;
 	cout << "Enter Infix Expression : "<<endl;
 	cin >> infix;
 	n = infix.length();

@@ -4,15 +4,14 @@
 #include <algorithm>
 #include<string>
 using namespace std;
-struct Root {
+class Tree{
+	private: struct Root {
     char elem;
     Root *lc;
     Root *rc;
-    
-    
-};
+	};
 
-	int isp(Stack<char> s){
+	private: int isp(Stack<char> s){
 	char x = s.peep();
 	if(x == '^'){
 		return 3;
@@ -34,7 +33,7 @@ struct Root {
 
 }
 
-int icp(char a){
+private: int icp(char a){
 	if(a == '('){
 		return 4;
 	
@@ -57,7 +56,7 @@ int icp(char a){
 }
 
 
-string  infxtpstfx(string infx,int n){
+public: string  infxtpstfx(string infx,int n){
 	string postfix;
 	Stack<char> s;
 	for(int i = 0;i<n;i++){
@@ -96,10 +95,9 @@ string  infxtpstfx(string infx,int n){
 		postfix += s.pop();
 	return postfix;
 }
-Root* exptree(string infix){
+public: Root* exptree(string infix){
 	int n = infix.length();
 	string postfix = infxtpstfx( infix, n);
-	cout <<"PostFix Expression : "<<postfix<<endl;
 	int i = 0;
 	Stack<Root*> s;
 	while(postfix[i] !='\0'){
@@ -128,43 +126,85 @@ Root* exptree(string infix){
 
 
 }
-void Inorderdisp(Root* P){
+public: void Inorderdisp(Root* P){
 	if(P!=NULL){
 		Inorderdisp(P->lc);
 		cout << P->elem;
 		Inorderdisp(P->rc);
 }
 }
-void Preorder(Root* P){
+public: void Preorder(Root* P){
 	if(P!=NULL){
 		cout << P->elem;
-		Inorderdisp(P->lc);
-		Inorderdisp(P->rc);
+		Preorder(P->lc);
+		Preorder(P->rc);
 }
 }
-void Postorder(Root* P){
+public: void Postorder(Root* P){
 	if(P!=NULL){
-		Inorderdisp(P->lc);
-		Inorderdisp(P->rc);
+		Postorder(P->lc);
+		Postorder(P->rc);
 		cout << P->elem;
 }
 }
+public: void iterativeInorder(Root* P){ 
+	string inorder;
+	Stack<Root*> s;
+	do
+	{
+	while (P!= NULL){ 
+		s.push(P);
+		P = P->lc;
+		}
+	if(!s.IsEmpty()){
+		P = s.pop();
+		inorder += P->elem;
+		P = P->rc;	
+	}
+	}while(P!= NULL || !s.IsEmpty());
+	cout << inorder;
+	}
+public: levelorder(root) { 
+if(T=NULL ) 
+then write(‘Tree is Empty) 
+return 
+else 
+{ 
+q = empty queue 
+enqueue(T) 
+
+while(!(isempty(q)) 
+{ node = dequeue(q) 
+else { write /visit (node) 
+if (node->left != NULL ) 	
+
+enqueue(node->left) 
+if (node->right != NULL) 
+	enqueue(node->right)
+};
 
 
 int main(){
 	string infix;
 	int n;
+	Tree t;
 	cout << "Enter Infix Expression : "<<endl;
 	cin >> infix;
 	n = infix.length();
+	string postfix = t.infxtpstfx( infix, n);
+	cout <<"PostFix Expression : "<<postfix<<endl;
 	cout <<"Expresion tree of "<<infix<<" is :" <<endl; 
 	cout <<"Inorder : "<<endl;
-	Inorderdisp(exptree(infix));
+	t.Inorderdisp(t.exptree(infix));
+	cout<<endl;
 	cout <<"Postorder : "<<endl;
-	Postorder(exptree(infix));
+	t.Postorder(t.exptree(infix));
+	cout<<endl;
 	cout <<"Preorder : "<<endl;
-	Preorder(exptree(infix));
-	
+	t.Preorder(t.exptree(infix));
+	cout<<endl;
+	cout <<"Iterative Inorder : "<<endl;
+	t.iterativeInorder(t.exptree(infix));
 	cout<<endl;
 
 

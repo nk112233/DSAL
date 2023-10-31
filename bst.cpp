@@ -14,7 +14,7 @@ class MyBST{
 	public: void Inorderdisp(Root* P){
 	if(P!=NULL){
 		Inorderdisp(P->lc);
-		cout << P->data;
+		cout << P->data<<endl;
 		Inorderdisp(P->rc);
 }
 }
@@ -43,10 +43,10 @@ class MyBST{
 		while(Q!=NULL){
 			P = Q;
 
-			if(P->data<x){
+			if(P->data>x){
 				Q = P->lc;
 			}
-			else if(P->data>x){
+			else if(P->data<x){
 				Q = P->rc;
 			}
 			else{
@@ -61,6 +61,7 @@ class MyBST{
 			P->rc= makenode(x);
 			}
 		}
+		return P;
 
 
 	}
@@ -82,7 +83,6 @@ int main(){
 	cin>>n;
 	MyBST tree; 
 	for(int i = 0 ; i<n;i++){
-		cout<<"1"<<endl;
 		tree.Insert();
 	}
 	tree.Inorderdisp(tree.getroot());

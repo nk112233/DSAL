@@ -3,8 +3,8 @@
 #include <cmath>
 #include <string.h>
 using namespace std;
-
-int isp(Stack<char> s){
+class MyPostfix{
+public: int isp(Stack<char> s){
 	char x = s.peep();
 	if(x == '^'){
 		return 3;
@@ -26,7 +26,7 @@ int isp(Stack<char> s){
 
 }
 
-int icp(char a){
+ public:  int icp(char a){
 	if(a == '('){
 		return 4;
 	
@@ -49,7 +49,7 @@ int icp(char a){
 }
 
 
-string  infxtpstfx(string infx,int n){
+ public: string  infxtpstfx(string infx,int n){
 	string postfix;
 	Stack<char> s;
 	for(int i = 0;i<n;i++){
@@ -90,7 +90,7 @@ string  infxtpstfx(string infx,int n){
 }
 
 
-int calculate(int op1 , char oprt,int op2){
+public: int calculate(int op1 , char oprt,int op2){
 	int result;
 	
 	// cout <<"op1 = "<< op1<<endl;
@@ -119,7 +119,7 @@ int calculate(int op1 , char oprt,int op2){
 }
 
 
-int evaluate(string postfix){
+public: int evaluate(string postfix){
 	Stack<int> s;
 	int i = 0;
 	while(postfix[i]!='\0'){
@@ -149,7 +149,7 @@ int evaluate(string postfix){
 	
 	return s.peep(); 
 }
-
+};
 int main(){
 	string infix;
 	int n;
@@ -158,8 +158,9 @@ int main(){
 	cout << "Enter Infix Expression : "<<endl;
 	cin >> infix;
 	n = infix.length();
-	cout <<"Postfix Expression is : "<< infxtpstfx(infix,n) <<endl;
-	int ans = evaluate(infxtpstfx(infix,n));
+	MyPostfix pst;
+	cout <<"Postfix Expression is : "<< pst.infxtpstfx(infix,n) <<endl;
+	int ans = pst.evaluate(pst.infxtpstfx(infix,n));
 	cout <<"Evaluation of "<<infix<<" is : "<<ans<<endl;
 
 return 0;

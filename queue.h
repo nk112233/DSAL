@@ -63,14 +63,8 @@ public:
         temp = f;
         while(temp != NULL){
         	cout << temp->elem;
+            temp = temp->next;
         }
-        }
-            
-        else{
-            return 0;
-        }
-
-
     }
 
 

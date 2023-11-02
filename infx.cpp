@@ -54,16 +54,12 @@ public: int isp(Stack<char> s){
 	Stack<char> s;
 	for(int i = 0;i<n;i++){
 		char ch = infx[i];
-		//cout <<"infx[i] = "<<infx[i]<<endl;
 		if(!isalpha(ch)){			
 			if(ch ==')'){
 				while(s.peep() != '('){
 					postfix += s.pop();
-					//cout << "tos = "<<s.peep()<<endl;
-				
 				}
 				s.pop();
-
 			}
 			else if(icp(ch)<=isp(s)){
 				while(icp(ch)<isp(s)){
@@ -92,10 +88,7 @@ public: int isp(Stack<char> s){
 
 public: int calculate(int op1 , char oprt,int op2){
 	int result;
-	
-	// cout <<"op1 = "<< op1<<endl;
-	// cout <<"op2 = "<< op2<<endl;
-	// cout << oprt<<endl;
+
 	if(oprt == '+'){
 		result = op2+op1;
 	}
@@ -104,7 +97,6 @@ public: int calculate(int op1 , char oprt,int op2){
 	}
 	else if(oprt == '*'){
 		result = op2*op1;
-		// cout << "result = "<<result<<endl;
 	}
 	else if(oprt == '/'){
 		result = op2/op1;
@@ -135,9 +127,6 @@ public: int evaluate(string postfix){
 				int op1 = s.pop();
 				int op2 = s.pop();
 				char oprt = postfix[i];
-				// cout << op1<<endl;
-				// cout <<op2<<endl;
-				// cout << oprt <<endl;
 				if(postfix[i+1] == '^' && oprt == '^'){
 					oprt = '*';
 				}
@@ -153,8 +142,6 @@ public: int evaluate(string postfix){
 int main(){
 	string infix;
 	int n;
-	//cout << "Enter the length of the expression : "<<endl;
-	//cin >> n;
 	cout << "Enter Infix Expression : "<<endl;
 	cin >> infix;
 	n = infix.length();

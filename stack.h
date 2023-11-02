@@ -20,7 +20,7 @@ public:
         if(temp == NULL)
             return 0;
         temp->elem = elem;
-        temp->next = tos;
+        temp->next = tos;                                 //Push Method
         tos = temp;
         return 1;
 
@@ -29,7 +29,7 @@ public:
     T pop(){
         Node *temp = new Node;
         temp = tos;
-        tos = temp->next;
+        tos = temp->next;                                 //Pop Method
         return temp->elem;
 
 
@@ -40,7 +40,7 @@ public:
         if(tos == NULL){
             return 1;
 
-        }
+        }                                               //IsEmpty Method
         else{
         	return 0;
         }
@@ -53,7 +53,7 @@ public:
             return tos->elem;
         }
             
-        else{
+        else{                                       //Peep Method
             return 0;
         }
 
@@ -63,20 +63,3 @@ public:
 
 
 };
-/*int main(){
-	Stack s;
-	cout << s.peep()<<endl;
-
-
-
-
-
-
-
-
-
-
-
-return 0;
-}
-*/

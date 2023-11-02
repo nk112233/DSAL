@@ -4,8 +4,8 @@
 #include <algorithm>
 #include<string>
 using namespace std;
-
-int isp(Stack<char> s){
+class MyPrefix{
+public: int isp(Stack<char> s){
 	char x = s.peep();
 	if(x == '^'){
 		return 3;
@@ -26,7 +26,7 @@ int isp(Stack<char> s){
 	}
 
 }
-int icp(char a){
+public: int icp(char a){
 	if(a == ')'){
 		return 4;
 	
@@ -47,7 +47,7 @@ int icp(char a){
 	}
 
 }
-string  infxtprfx(string infx,int n){
+public: string  infxtprfx(string infx,int n){
 	string prefix;
 	Stack<char> s;
 	
@@ -89,7 +89,7 @@ string  infxtprfx(string infx,int n){
 
 
 }
-int calculate(int op1 , char oprt,int op2){
+public: int calculate(int op1 , char oprt,int op2){
 	int result;
 	if(oprt == '+'){
 		result = op1+op2;
@@ -111,7 +111,7 @@ int calculate(int op1 , char oprt,int op2){
 
 
 }
-int evaluate(string prefix,int n){
+public: int evaluate(string prefix,int n){
 	Stack<int> oprnd;
 	for(int i = n-1 ; i>0 ;i--){
 		if(isalpha(prefix[i])){
@@ -135,16 +135,18 @@ int evaluate(string prefix,int n){
 	return oprnd.peep();
 
 }
+};
 int main(){
 	string infix;
 	int n;
 	cout << "Enter Infix Expression : "<<endl;
 	cin >> infix;
 	n = infix.length();
-	string prefix = infxtprfx(infix,n);
+	MyPrefix prf;
+	string prefix = prf.infxtprfx(infix,n);
 	int n1 = prefix.length();
-	cout <<"Prefix Expression is : "<< infxtprfx(infix,n)  <<endl;
-	int ans = evaluate(infxtprfx(infix,n),n1);
+	cout <<"Prefix Expression is : "<< prf.infxtprfx(infix,n)  <<endl;
+	int ans = prf.evaluate(prf.infxtprfx(infix,n),n1);
 	cout <<"Evaluation of "<<infix<<" is : "<<ans<<endl;
 
 return 0;

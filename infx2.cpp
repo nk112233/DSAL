@@ -104,9 +104,6 @@ bool check_key(map<char, int> m, char key)
 int calculate(int op1 , char oprt,int op2){
 	int result;
 	
-	// cout <<"op1 = "<< op1<<endl;
-	// cout <<"op2 = "<< op2<<endl;
-	// cout << oprt<<endl;
 	if(oprt == '+'){
 		result = op2+op1;
 	}
@@ -115,7 +112,6 @@ int calculate(int op1 , char oprt,int op2){
 	}
 	else if(oprt == '*'){
 		result = op2*op1;
-		// cout << "result = "<<result<<endl;
 	}
 	else if(oprt == '/'){
 		result = op2/op1;
@@ -151,9 +147,6 @@ int evaluate(string postfix){
 				int op1 = s.pop();
 				int op2 = s.pop();
 				char oprt = postfix[i];
-				// cout << op1<<endl;
-				// cout <<op2<<endl;
-				// cout << oprt <<endl;
 				if(postfix[i+1] == '^' && oprt == '^'){
 					oprt = '*';
 				}
@@ -169,8 +162,6 @@ int evaluate(string postfix){
 int main(){
 	string infix;
 	int n;
-	//cout << "Enter the length of the expression : "<<endl;
-	//cin >> n;
 	cout << "Enter Infix Expression : "<<endl;
 	cin >> infix;
 	n = infix.length();

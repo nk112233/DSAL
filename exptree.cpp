@@ -17,7 +17,7 @@ class Tree{
 		return 3;
 	}
 	else if(x == '*' || x == '/'){
-		return 2;
+		return 2;													// Instack Priority
 
 	}
 	else if(x == '+' || x == '-'){
@@ -45,7 +45,7 @@ private: int icp(char a){
 		return 2;
 
 	}
-	else if(a == '+' || a == '-'){
+	else if(a == '+' || a == '-'){													// Incoming Priority
 		return 1;
 	
 	}
@@ -63,7 +63,7 @@ public: string  infxtpstfx(string infx,int n){
 		char ch = infx[i];
 		//cout <<"infx[i] = "<<infx[i]<<endl;
 		if(!isalpha(ch)){			
-			if(ch ==')'){
+			if(ch ==')'){														//Infix to Postfix Conversion
 				while(s.peep() != '('){
 					postfix += s.pop();
 					//cout << "tos = "<<s.peep()<<endl;
@@ -103,7 +103,7 @@ public: Root* exptree(string infix){
 	while(postfix[i] !='\0'){
 		char ch = postfix[i];
 		if(isalpha(ch)){
-			Root* ele = new Root();
+			Root* ele = new Root();										// Creation of Expresion Tree
 			ele->elem = ch;
 			s.push(ele);
 		}
@@ -129,21 +129,21 @@ public: Root* exptree(string infix){
 public: void Inorderdisp(Root* P){
 	if(P!=NULL){
 		Inorderdisp(P->lc);
-		cout << P->elem;
+		cout << P->elem;										//Inorder Display
 		Inorderdisp(P->rc);
 }
 }
 public: void Preorder(Root* P){
 	if(P!=NULL){
 		cout << P->elem;
-		Preorder(P->lc);
+		Preorder(P->lc);										//Preorder Display
 		Preorder(P->rc);
 }
 }
 public: void Postorder(Root* P){
 	if(P!=NULL){
 		Postorder(P->lc);
-		Postorder(P->rc);
+		Postorder(P->rc);										//Postorder Display
 		cout << P->elem;
 }
 }
@@ -153,7 +153,7 @@ public: void iterativeInorder(Root* P){
 	do
 	{
 	while (P!= NULL){ 
-		s.push(P);
+		s.push(P);												//Iterativeorder Display
 		P = P->lc;
 		}
 	if(!s.IsEmpty()){
@@ -164,26 +164,7 @@ public: void iterativeInorder(Root* P){
 	}while(P!= NULL || !s.IsEmpty());
 	cout << inorder;
 	}
-public: levelorder(root) { 
-if(T=NULL ) 
-then write(‘Tree is Empty) 
-return 
-else 
-{ 
-q = empty queue 
-enqueue(T) 
-
-while(!(isempty(q)) 
-{ node = dequeue(q) 
-else { write /visit (node) 
-if (node->left != NULL ) 	
-
-enqueue(node->left) 
-if (node->right != NULL) 
-	enqueue(node->right)
 };
-
-
 int main(){
 	string infix;
 	int n;
@@ -206,27 +187,6 @@ int main(){
 	cout <<"Iterative Inorder : "<<endl;
 	t.iterativeInorder(t.exptree(infix));
 	cout<<endl;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 return 0;
 }

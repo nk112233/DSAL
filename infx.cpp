@@ -15,7 +15,7 @@ public: int isp(Stack<char> s){
 	}
 	else if(x == '+' || x == '-'){
 		return 1;
-	
+	                                                                  // Instack Priority
 	}
 	else if(x == '('){
 		return 0;
@@ -36,7 +36,7 @@ public: int isp(Stack<char> s){
 	}
 	else if(a == '*' || a == '/'){
 		return 2;
-
+																			// Incoming Priority
 	}
 	else if(a == '+' || a == '-'){
 		return 1;
@@ -54,7 +54,7 @@ public: int isp(Stack<char> s){
 	Stack<char> s;
 	for(int i = 0;i<n;i++){
 		char ch = infx[i];
-		if(!isalpha(ch)){			
+		if(!isalpha(ch)){												//Infix to Postfix Conversion
 			if(ch ==')'){
 				while(s.peep() != '('){
 					postfix += s.pop();
@@ -98,7 +98,7 @@ public: int calculate(int op1 , char oprt,int op2){
 	else if(oprt == '*'){
 		result = op2*op1;
 	}
-	else if(oprt == '/'){
+	else if(oprt == '/'){													// Calculate method to get value of each operation
 		result = op2/op1;
 	}
 	else if(oprt == '^'){
@@ -119,7 +119,7 @@ public: int evaluate(string postfix){
 			int push;
 			
 			cout <<"Enter the value of "<<postfix[i]<<" : "<<endl;
-			cin >>push; 
+			cin >>push; 												// Postfix Evaluation
 			s.push(push);
 		}
 		else{

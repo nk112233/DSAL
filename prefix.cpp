@@ -13,7 +13,7 @@ public: int isp(Stack<char> s){
 	else if(x == '*' || x == '/'){
 		return 2;
 
-	}
+	}														// Instack Priority
 	else if(x == '+' || x == '-'){
 		return 1;
 	
@@ -36,7 +36,7 @@ public: int icp(char a){
 	}
 	else if(a == '*' || a == '/'){
 		return 2;
-
+																										// Incoming Priority
 	}
 	else if(a == '+' || a == '-'){
 		return 1;
@@ -54,7 +54,7 @@ public: string  infxtprfx(string infx,int n){
 	for(int i = n;i>=0;i--){
 		 char ch  = infx[i];
 		if(!isalpha(ch)){			
-			if(ch =='('){
+			if(ch =='('){													//Infix to Prefix Conversion
 				while(s.peep() != ')'){
 					prefix += s.pop();
 				}
@@ -100,7 +100,7 @@ public: int calculate(int op1 , char oprt,int op2){
 	else if(oprt == '*'){
 		result = op1*op2;
 	}
-	else if(oprt == '/'){
+	else if(oprt == '/'){												// Calculate method to get value of each operation
 		result = op1/op2;
 	}
 	else if(oprt == '^'){
@@ -119,7 +119,7 @@ public: int evaluate(string prefix,int n){
 			cout << "Enter the value of "<<prefix[i]<<" :"<<endl;
 			cin >> op;
 			oprnd.push(op);
-
+																							// Prefix Evaluation
 		}
 		else{
 			if(!oprnd.IsEmpty()){

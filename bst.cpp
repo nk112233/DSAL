@@ -29,11 +29,11 @@ class MyBST{
 		p->data = x;
 		return p;
 	}
-	public: Root* Insert(){
-		int x;
+	public: Root* Insert(int x){
+		// int x;
 		Root* P = root;
 		Root* Q = root;
-		cin >> x;
+		// cin >> x;
 		if(root == NULL){
 			root = makenode(x);
 			return root;
@@ -84,7 +84,7 @@ class MyBST{
 		return NULL;
 		}
 		}
-	public: Root* del(int key){
+	public: int del(int key){
 		if(root == NULL){
 			cout<<"Empty Tree!"<<endl;
 		}
@@ -94,6 +94,7 @@ class MyBST{
 		p = root;
 		while(delele!=NULL && delele->data != key){
 			p = delele;
+			
 			if(delele->data > key){
 				delele = p->lc;
 			}
@@ -101,6 +102,8 @@ class MyBST{
 				delele = p->rc;
 			}
 		}
+		cout << "delele"<<delele->data<<endl;
+		cout << delele->data<<endl;
 		if(delele->lc == NULL && delele->rc == NULL){
 			if(p->lc == delele){
 				p->lc = NULL;
@@ -108,15 +111,16 @@ class MyBST{
 			else if(p->rc == delele){
 				p->rc = NULL;
 			}
-			return delele;
+			return delele->data;
 		}
 		else if(delele->lc != NULL && delele->rc != NULL){
 			Root* Q = new Root;
 			Root* P = new Root;
 			Q = delele;
+			Q = Q->lc;
 			while(Q->lc != NULL && Q->rc !=NULL){
 				P = Q;
-				Q = Q->lc;
+				Q = Q->rc;
 			}
 			delele->data = Q->data;
 			if(P->lc == Q){
@@ -125,7 +129,7 @@ class MyBST{
 			else if(p->rc == Q){
 				P->rc = NULL;
 			}
-			return delele;
+			return delele->data;
 		}
 		else{
 			Root* temp = new Root;
@@ -148,7 +152,7 @@ class MyBST{
 					p->lc = temp;
 				}
 			}
-			return delele;
+			return delele->data;
 		}
 
 }
@@ -164,11 +168,12 @@ class MyBST{
 };
 int main(){
 	int n,ch;
-	cout <<"Enter n:"<<endl;
-	cin>>n;
+	//cout <<"Enter n:"<<endl;
+	//cin>>n;
 	MyBST tree;
-	for(int i = 0 ; i<n;i++){
-		tree.Insert();
+	int inp[] = {50,34,89,56,26,78,37,11,13,10};
+	for(int i = 0 ; i<10;i++){
+		tree.Insert(inp[i]);
 	}
 	tree.Inorderdisp(tree.getroot());
 	cout <<"1.Search\n2.Delete\n3.Display"<<endl;
@@ -179,14 +184,15 @@ int main(){
 	 		cout<<"Enter element to be searched :"<<endl;
 	 		cin >>sh;
 	 		cout<<"Found"<<tree.search(sh)->data<<endl;
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	 	case 2:
+	 		
+	 		cout<<"Enter element to be deleted :"<<endl;
+	 		cin >>sh;
+	 		cout <<"Deleted : "<<tree.del(sh)<<endl;
+	 	case 3:
+	 		tree.Inorderdisp(tree.getroot());
+	 	
+	 		
 	 
 	 }
 

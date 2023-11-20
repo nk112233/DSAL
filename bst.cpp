@@ -86,8 +86,8 @@ class MyBST{
 			else if(temp->data < key){
 				temp = temp->rc;
 			}
-		return NULL;
 		}
+		return NULL;
 		}
 	public: int del(int key){
 		if(root == NULL){
@@ -190,13 +190,17 @@ public : int height(Root *root){
 	}
 
 	public: void copy_tree( Root * tree2, Root *tree1){
-		tree2 = new Root;
 		if(tree1 == NULL){
 			tree2 = NULL;
+			return;
 		}
 		else{
 			tree2->data = tree1->data;
+			if(tree2->lc == NULL && tree1->lc != NULL)
+				tree2->lc = makenode(9999);
 			copy_tree(tree2->lc,tree1->lc);
+			if(tree2->rc == NULL && tree1->rc != NULL)
+				tree2->rc = makenode(9999);
 			copy_tree(tree2->rc , tree1->rc);
 		}
 	}
@@ -281,39 +285,53 @@ int main(){
 	for(int i = 0 ; i<10;i++){
 		tree.Insert(inp[i]);
 	}
+	 Root* tree2 = new Root;
 	tree.Inorderdisp(tree.getroot());
+	 int cont;
+	 do{
 	cout <<"1.Search\n2.Delete\n3.Display\n4.Height\n5.Mirror Tree\n6.Copy Tree\n7.Display Parent and Child Nodes\n8.Display all leaf nodes\n9.Level-wise Traversal"<<endl;
 	 cin>>ch;
-	 Root* tree2 = new Root;
 	 switch(ch){
 	 	case 1:
 	 		int sh;
 	 		cout<<"Enter element to be searched :"<<endl;
 	 		cin >>sh;
 	 		cout<<"Found"<<tree.search(sh)->data<<endl;
+			break;
 	 	case 2:
 	 		
 	 		cout<<"Enter element to be deleted :"<<endl;
 	 		cin >>sh;
 	 		cout <<"Deleted : "<<tree.del(sh)<<endl;
+			break;
 	 	case 3:
 	 		tree.Inorderdisp(tree.getroot());
+			break;
 		case 4:
-			tree.height(tree.getroot());
+			cout <<"Height of tree : "<<tree.height(tree.getroot());
+			break;
 		case 5:
 			tree.mirrortree(tree.getroot());
 			tree.Inorderdisp(tree.getroot());
+			break;
 		
 		case 6:
 			tree.copy_tree(tree2,tree.getroot());
 	 		tree.Inorderdisp(tree2);
+			break;
 	 	case 7:
 			tree.parentarr(tree.getroot());
+			break;
 		case 8:
 			tree.displf(tree.getroot());
+			break;
 		case 9:
 			tree.level_order(tree.getroot());
+			break;
 	 
 	 }
+	 cout <<"Do you want to Continue ?(Press 1)"<<endl;
+	 cin >> cont;
+	 }while(cont == 1);
 return 0;
 }

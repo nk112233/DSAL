@@ -6,32 +6,29 @@ class Queue{
     private: struct Node {
     T elem;
     Node *next;
-    
-    
 };
-    private : Node* f,r;
-    public: Stack(){
+    private : Node* f;
+    private : Node* r;
+    public: Queue(){
     	f = NULL;
     	r = NULL;
     }
 public:
     bool Eque(T elem){
-       	if(r == NULL){
-        	Node *temp = new Node;
-        	if(temp == NULL)
-            	return 0;
+        Node *temp = new Node;
+       	if(r == NULL || f == NULL){
        	 	f = temp;
         	r = temp; 
         	temp->elem = elem;
         	temp->next = NULL;
         	return 1;
         }
-        else{
-        	r = temp; 
+        else{ 
         	temp->elem = elem;
         	r->next = temp;
         	temp->next = NULL;
         	r = temp;
+            return 1;
         }
 
     }
@@ -47,10 +44,11 @@ public:
     }
 public:
     bool IsEmpty(){
-        if(r == NULL){
+        if(r == NULL || f == NULL){
             return 1;
 
         }
+
         else{
         	return 0;
         }
@@ -62,7 +60,7 @@ public:
         Node *temp = new Node;
         temp = f;
         while(temp != NULL){
-        	cout << temp->elem;
+        	cout << temp->elem<<endl;
             temp = temp->next;
         }
     }

@@ -136,7 +136,7 @@ int main(){
     graph.addGraph(vertices);
 
     int srcv;
-    cout << "Enter the source vertex: ";
+    cout << "Enter the source vertex : ";
     cin >> srcv;
 
     graph.dijsktras(vertices, sourceVertex);

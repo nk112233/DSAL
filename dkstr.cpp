@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class Graph
+class MyGraph
 {
 private:
     int arr[20][20];
@@ -73,7 +73,7 @@ void Graph::dijsktras(int arr1[], int s)
     }
 }
 
-void Graph::printShortestPath(int arr1[], int s)
+void Graph::shrtpath(int arr1[], int s)
 {
     cout << "Shortest paths from source " << s << " to other vertex:" << endl;
 
@@ -130,17 +130,17 @@ void Graph::addGraph(int arr1[])
 }
 
 int main(){
-    Graph graph;
+    MyGraph graph;
     int vertices[20];
 
     graph.addGraph(vertices);
 
-    int sourceVertex;
+    int srcv;
     cout << "Enter the source vertex: ";
-    cin >> sourceVertex;
+    cin >> srcv;
 
     graph.dijsktras(vertices, sourceVertex);
-    graph.printShortestPath(vertices, sourceVertex);
+    graph.shrtpath(vertices, sourceVertex);
 
     return 0;
 }

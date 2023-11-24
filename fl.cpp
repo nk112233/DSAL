@@ -13,7 +13,7 @@ class Mystdb{
 		ofstream file;
 		cout <<"How many Students to add to database : "<<endl;
 		cin >> n;
-		file.open("std.txt",ios::app);
+		file.open("std.txt",ios::out);
 		for(int i = 0 ; i < n ; i++){
 		Student stdrc;
 		cout <<"Enter Roll Number of Student : "<<endl;
@@ -41,7 +41,7 @@ class Mystdb{
 	public: void display_all(){
 		ifstream file;
 		Student stdrc;
-		file.open("std.txt",ios::binary);
+		file.open("std.txt",ios::in);
 		while(file.read((char*) &stdrc, sizeof(stdrc))){
 			cout <<"Student Name : "<<stdrc.name<<endl;
 		}
@@ -51,7 +51,7 @@ class Mystdb{
 	public: void search(int rn){
 		ifstream file;
 		Student stdrc;
-		file.open("std.txt",ios::binary);
+		file.open("std.txt",ios::in);
 		while(file.read((char*) &stdrc, sizeof(stdrc))){
 			if(stdrc.roll_no == rn){
 				cout << "Found "<< rn <<endl;
@@ -65,11 +65,11 @@ class Mystdb{
 	}
 	public: void del_rc(int key){
 		ifstream file;
-		file.open("std.txt",ios::binary);
+		file.open("std.txt",ios::in);
 		Student stdrc;
 		ofstream temp;
 		bool found = 0;
-		temp.open("temp.txt",ios::binary);
+		temp.open("temp.txt",ios::out);
 		while(file.read((char*) &stdrc, sizeof(stdrc))){
 			if(stdrc.roll_no != key){
 				temp.write((char*) &stdrc, sizeof(stdrc));
@@ -92,11 +92,11 @@ class Mystdb{
 	}
 	public: void modify_rc(int key){
 		ifstream file;
-		file.open("std.txt",ios::binary);
+		file.open("std.txt",ios::in);
 		Student stdrc;
 		ofstream temp;
 		bool found = 0;
-		temp.open("temp.txt",ios::binary);
+		temp.open("temp.txt",ios::out);
 		while(file.read((char*) &stdrc, sizeof(stdrc))){
 			if(stdrc.roll_no == key){
 				cout << "Enter data to Modify "<<endl;
@@ -140,7 +140,7 @@ int main(){
 	s.del_rc(16);
 	s.modify_rc(12);
 	s.display_all();
-	s.clear_db();
+	//s.clear_db();
 	s.add_rc();
 	s.display_all();
 }

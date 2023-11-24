@@ -76,8 +76,6 @@ class MyGraph{
 						P[i] = current;
 					}
 				}
-
-				// Update this part within the loop
 				mincost = 32767;
 				for (int i = 0; i < v; i++) {
 					if (Visited[i] == 0 && D[i] < mincost) {
@@ -89,7 +87,6 @@ class MyGraph{
 				totalvisited += 1;
 			}
 
-			// Calculate the total minimum cost
 			mincost = 0;
 			for (int i = 0; i < v; i++) {
 				mincost += D[i];
@@ -97,41 +94,51 @@ class MyGraph{
 			}
 			return mincost;
 		}
-		int find(int i){
-			while (parent[i] != i){
-			i = parent[i];
-			return i;
-			}
+		public: int find(int i) {
+    		while (parent[i] != i) {
+        		i = parent[i];
+    		}
+   			 return i;
 		}
-		void union1(int i, int j){
+		public: void union1(int i, int j){
 			int a = find(i);
 			int b = find(j);
 			parent[a] = b;
 			}
-			int kruskal(){
-			int mincost = 0; // Cost of min MST.
-			for (int i = 0; i < v; i++)
-				parent[i] = i;
-			// Include minimum weight edges one by one
-			int edge_count = 0;
-			while (edge_count < v - 1) {
-				int min = 32767;
-				int  a = -1;
-				int b = -1;
-				for (int i = 0; i < v; i++) {
-					for (int j = 0; j < v; j++) {
-						if (find(i) != find(j) && Am[i][j] < min){
-							min = Am[i][j];
-							a = i;
-							b = j;
-						}
-					}
-				}
-				union1(a, b);
-				mincost += min;
-			}
-			return mincost;
-			}
+		public: int kruskal() {
+    int mincost = 0; 
+    for (int i = 0; i < v; i++)
+        parent[i] = i; 
+
+
+    int edge_count = 0;
+    while (edge_count < v - 1) {
+        int min = 32767;
+        int a = -1;
+        int b = -1;
+        for (int i = 0; i < v; i++) {
+            for (int j = 0; j < v; j++) {
+                if (find(i) != find(j) && Am[i][j] != 0 && Am[i][j] < min) {
+                    min = Am[i][j];
+                    a = i;
+                    b = j;
+                }
+            }
+        }
+        if (a != -1 && b != -1) {  
+            if (find(a) != find(b)) {
+                union1(a, b);
+                mincost += min;
+                cout << "Edge included: (" << a << ", " << b << ") with weight " << min << endl;
+                edge_count++;
+            }
+        }
+    }
+    return mincost;
+}
+
+
+
 
 
 
@@ -145,8 +152,8 @@ int main(){
 	graph.display();
 	int min = graph.prims();
 	int minkr = graph.kruskal();
-	cout <<"Minimum Cost : "<<min<<endl;
-	cout <<"Minimum Cost : "<<minkr<<endl;
+	cout <<"Minimum Cost Prim's : "<<min<<endl;
+	cout <<"Minimum Cost Kruskal's : "<<minkr<<endl;
 	
 	
 	

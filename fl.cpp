@@ -5,7 +5,8 @@ using namespace std;
 struct Student{
 	int roll_no;
 	char name[15];
-	char div[2];
+	int div;
+	char addr[200];
 };
 class Mystdb{
 	public: void add_db(){
@@ -22,6 +23,8 @@ class Mystdb{
 		cin >> stdrc.name;
 		cout << "Enter Division"<<endl;
 		cin >> stdrc.div;
+		cout << "Enter Address"<<endl;
+		cin >> stdrc.addr;
 		file.write((char*) &stdrc, sizeof(stdrc));
 	}
 	file.close();
@@ -36,6 +39,8 @@ class Mystdb{
 		cin >> stdrc.name;
 		cout << "Enter Division"<<endl;
 		cin >> stdrc.div;
+		cout << "Enter Address"<<endl;
+		cin >> stdrc.addr;
 		file.write((char*) &stdrc, sizeof(stdrc));
 	}
 	public: void display_all(){
@@ -43,7 +48,10 @@ class Mystdb{
 		Student stdrc;
 		file.open("std.txt",ios::in);
 		while(file.read((char*) &stdrc, sizeof(stdrc))){
+			cout <<"Student Roll No. : "<<stdrc.roll_no<<endl;
 			cout <<"Student Name : "<<stdrc.name<<endl;
+			cout <<"Student Division : "<<stdrc.div<<endl;
+			cout <<"Student Address : "<<stdrc.addr<<endl;
 		}
 		file.close();
 
@@ -106,6 +114,8 @@ class Mystdb{
 				cin >> stdrc.name;
 				cout << "Enter Division"<<endl;
 				cin >> stdrc.div;
+				cout << "Enter Address"<<endl;
+				cin >> stdrc.addr;
 				found = 1;
 			}
 			temp.write((char*) &stdrc, sizeof(stdrc));
@@ -132,15 +142,70 @@ class Mystdb{
 
 
 };
-int main(){
-	Mystdb s;
-	s.add_db();
-	s.display_all();
-	s.search(16);
-	s.del_rc(16);
-	s.modify_rc(12);
-	s.display_all();
-	//s.clear_db();
-	s.add_rc();
-	s.display_all();
+int main() {
+    Mystdb s;
+    int choice, rollNo;
+
+    do {
+        cout << "\n*** Student Database Management System ***\n";
+        cout << "1. Add Students to Database\n";
+        cout << "2. Add a Single Student Record\n";
+        cout << "3. Display All Students\n";
+        cout << "4. Search for a Student\n";
+        cout << "5. Delete a Student Record\n";
+        cout << "6. Modify a Student Record\n";
+        cout << "7. Clear Database\n";
+        cout << "8. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                s.add_db();
+                break;
+
+            case 2:
+                s.add_rc();
+                break;
+
+            case 3:
+                s.display_all();
+                break;
+
+            case 4:
+                cout << "Enter Roll Number to search: ";
+                cin >> rollNo;
+                s.search(rollNo);
+                break;
+
+            case 5:
+                cout << "Enter Roll Number to delete: ";
+                cin >> rollNo;
+                s.del_rc(rollNo);
+                break;
+
+            case 6:
+                cout << "Enter Roll Number to modify: ";
+                cin >> rollNo;
+                s.modify_rc(rollNo);
+                break;
+
+            case 7:
+                s.clear_db();
+                cout << "Database cleared.\n";
+                break;
+
+            case 8:
+                cout << "Exiting the program.\n";
+                break;
+
+            default:
+                cout << "Invalid choice. Please try again.\n";
+                break;
+        }
+
+    } while (choice != 8);
+
+    return 0;
 }
+

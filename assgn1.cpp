@@ -263,9 +263,9 @@ void SE11 :: disp_one(int index){
 
 void SE11 :: bubl_rno(){
 
-	for(int j = 1;j<n-1;j++){
+	for(int j = 0;j<n-1;j++){
 		int counter = 0;
-		for(int i = 0 ; i<n-j;i++){
+		for(int i = 0 ; i<n-j-1;i++){
 			if(S[i].rno > S[i+1].rno){
 				int j = i+1;
 				swap(i,j);
